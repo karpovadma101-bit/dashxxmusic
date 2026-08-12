@@ -406,25 +406,42 @@
   }
 
   .genre-btn {
-    background: var(--brand-red);
+   background: var(--brand-red);
     color: #FFFFFF;
     border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 999px;
-    padding: clamp(14px, 4vw, 18px) 12px;
+    border-radius: 24px;
+    padding: clamp(12px, 3.5vw, 16px) 10px;
     font-family: var(--font-main);
-    font-size: clamp(14px, 4vw, 16px);
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 8px 24px rgba(216, 40, 47, 0.3);
     transition: transform 0.15s ease;
-    min-height: 48px;
+    min-height: 64px;
     -webkit-tap-highlight-color: transparent;
   }
 
   .genre-btn:active { transform: scale(0.95); }
+
+  .genre-btn .btn-title {
+    font-size: clamp(14px, 3.8vw, 16px);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .genre-btn .btn-subtitle {
+    font-size: clamp(10px, 2.8vw, 11px);
+    font-weight: 600;
+    opacity: 0.85;
+    line-height: 1.2;
+    text-transform: none;
+  }
 
   /* Корректировки для сверхмаленьких экранов (например iPhone SE 1st gen / Android 320px-360px) */
   @media (max-width: 360px) {
@@ -517,8 +534,14 @@
 
   <!-- 7. GENRES SWITCHER -->
   <section class="genre-grid">
-    <button class="genre-btn">JAZZ</button>
-    <button class="genre-btn">HIP-HOP</button>
+    <button class="genre-btn">
+      <span class="btn-title">JAZZ</span>
+      <span class="btn-subtitle">Город с характером</span>
+    </button>
+    <button class="genre-btn">
+      <span class="btn-title">HIP-HOP</span>
+      <span class="btn-subtitle">Город в движении</span>
+    </button>
   </section>
 
 </div>
