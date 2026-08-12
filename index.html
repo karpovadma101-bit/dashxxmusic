@@ -98,13 +98,11 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--off-white);
     
-    /* Безопасные отступы под челки и жесты навигации iOS/Android */
     padding-top: calc(20px + env(safe-area-inset-top, 0px));
     padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
     padding-left: clamp(16px, 5vw, 24px);
     padding-right: clamp(16px, 5vw, 24px);
     
-    /* Фолбэк высоты для старых браузеров + dynamic dvh */
     min-height: 100vh;
     min-height: 100dvh;
     
@@ -114,11 +112,19 @@
     justify-content: space-between;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     margin: 0 -16px;
+    position: relative;
+  }
+
+  /* Шапка Hero с бейджем и логотипом */
+  .hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   .eyebrow {
     display: inline-flex;
-    align-self: flex-start;
     align-items: center;
     gap: 8px;
     font-size: clamp(10px, 3vw, 12px);
@@ -139,7 +145,13 @@
     box-shadow: 0 0 10px var(--brand-teal);
   }
 
-  /* Резиновая типографика заголовка */
+  /* Стиль логотипа А101 */
+  .brand-logo {
+    height: clamp(24px, 6vw, 32px);
+    width: auto;
+    object-fit: contain;
+  }
+
   .hero-card h1 {
     font-family: var(--font-main);
     font-weight: 800;
@@ -160,15 +172,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-  }
-
-  .scroll-hint {
-    font-size: clamp(11px, 3vw, 13px);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    opacity: 0.85;
   }
 
   .eq-hero {
@@ -201,7 +204,6 @@
       50% { transform: scaleY(1); }
     }
   }
-
   /* ===== 2. ПЛЕЕР ===== */
   .player-card {
     padding: clamp(16px, 5vw, 20px);
@@ -438,7 +440,10 @@
 
   <!-- 1. HERO SECTION -->
   <section class="hero-card">
-    <span class="eyebrow"><span class="dot"></span>Джинглы · 3 жанра</span>
+   <div class="hero-header">
+      <span class="eyebrow"><span class="dot"></span>Джинглы · 3 жанра</span>
+      <img src="type=red(1).svg" alt="А101" class="brand-logo">
+    </div>
 
     <h1>Послушай,<br>как <span class="accent">звучит</span><br>твой город</h1>
 
