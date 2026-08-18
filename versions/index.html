@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Город звучит — 7 версий лендинга</title>
+<meta name="description" content="Спецпроект А101 × DASHXX: семь вариантов лендинга аудиобренда. Выберите финалиста.">
+<meta name="robots" content="noindex">
+<style>
+:root{--red:#E2232E;--ink:#1E1E22;--ink2:#55555C;--ink3:#8E8E96;--paper:#fff;--paper2:#F5F5F7;--line:rgba(30,30,34,.1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(18px,3.4vw,40px)}
+header{padding:44px 0 8px}
+header .k{color:var(--red);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;font-family:ui-monospace,Menlo,monospace}
+h1{margin:10px 0 8px;font-size:clamp(30px,4.6vw,52px);font-weight:800;letter-spacing:-.035em;line-height:1}
+header p{margin:0;color:var(--ink2);max-width:60ch;font-size:15.5px;line-height:1.55}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:30px 0 60px}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;transition:box-shadow .2s,transform .2s;background:var(--paper)}
+.card:hover{box-shadow:0 16px 40px rgba(30,30,34,.14);transform:translateY(-2px)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;background:var(--paper2)}
+.card .b{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.card .t{display:flex;align-items:baseline;gap:10px}
+.card .no{color:var(--red);font-weight:800;font-size:13px;font-family:ui-monospace,Menlo,monospace}
+.card b{font-size:17px;font-weight:800;letter-spacing:-.02em}
+.card span{color:var(--ink3);font-size:13.5px;line-height:1.5}
+.card .tag{margin-top:4px;align-self:flex-start;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-family:ui-monospace,Menlo,monospace;color:var(--ink2);background:var(--paper2);border-radius:999px;padding:5px 10px}
+.card.pick{border-color:var(--red)}
+.card.pick .tag{background:#FDECEC;color:var(--red)}
+footer{border-top:1px solid var(--line);padding:20px 0 40px;color:var(--ink3);font-size:12.5px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="k">А101 × DASHXX · Аудиобренд · 2026</div>
+  <h1>«Город звучит» — 7 версий</h1>
+  <p>Семь вариантов лендинга спецпроекта. У всех одна основа: три джингла XXSOUND, тексты, дизайн-токены А101. Различается подача. Откройте каждую и включите звук.</p>
+</header>
+<div class="grid">
+  <a class="card" href="../v1/"><img src="thumbs/v1.jpg" alt="Версия 1: светлый разворот с рендером района" loading="lazy">
+    <span class="b"><span class="t"><span class="no">V1</span><b>Рендер-спектр</b></span><span>Светлый редакционный разворот. Рендер района разрезан на 48 колонок, высота которых — живой спектр трека.</span><span class="tag">Бумажная</span></span></a>
+  <a class="card" href="../v2/"><img src="thumbs/v2.jpg" alt="Версия 2: тёмный экран с эквалайзером" loading="lazy">
+    <span class="b"><span class="t"><span class="no">V2</span><b>Эквалайзер</b></span><span>Плеер и эквалайзер во всю ширину, без изображений. До play — форма волны трека, после — живой спектр.</span><span class="tag">Студийная</span></span></a>
+  <a class="card" href="../v3/"><img src="thumbs/v3.jpg" alt="Версия 3: Now Playing с живой обложкой" loading="lazy">
+    <span class="b"><span class="t"><span class="no">V3</span><b>Now Playing</b></span><span>Логика Apple Music: живые обложки на canvas, текст и очередь, фон подсвечен цветом обложки.</span><span class="tag">По мотивам Apple Music</span></span></a>
+  <a class="card" href="../v4/"><img src="thumbs/v4.jpg" alt="Версия 4: десктопный плеер в три колонки" loading="lazy">
+    <span class="b"><span class="t"><span class="no">V4</span><b>Десктоп-плеер</b></span><span>Три колонки: плеер, текст, очередь. Горячие клавиши, медиаклавиши ОС, нижняя панель.</span><span class="tag">Десктопная</span></span></a>
+  <a class="card" href="../v5/"><img src="thumbs/v5.jpg" alt="Версия 5: плейлист в стиле Spotify" loading="lazy">
+    <span class="b"><span class="t"><span class="no">V5</span><b>Плейлист</b></span><span>Сайдбар, страница плейлиста, таблица треков, постоянный нижний плеер — в красном А101.</span><span class="tag">По мотивам Spotify</span></span></a>
+  <a class="card" href="../v6/"><img src="thumbs/v6.jpg" alt="Версия 6: волна А101" loading="lazy">
+    <span class="b"><span class="t"><span class="no">V6</span><b>Волна А101</b></span><span>Живой пульсирующий шар, чипы настроений, светлая тема как на a101.ru. Волна не останавливается.</span><span class="tag">По мотивам Яндекс Музыки</span></span></a>
+  <a class="card pick" href="../v7/"><img src="thumbs/v7.jpg" alt="Версия 7: синтез лучших решений" loading="lazy">
+    <span class="b"><span class="t"><span class="no">V7</span><b>Синтез</b></span><span>Лучшее из v4–v6: волна и светлая тема, постоянный плеер, текст рядом с треками, мобильная оптимизация.</span><span class="tag">Рекомендуемая</span></span></a>
+</div>
+<footer><span>Музыка — DASHXX / XXSOUND · Аудиобренд А101</span><span>В каждой папке есть index-standalone.html — версия одним файлом</span></footer>
+</div>
+</body>
+</html>

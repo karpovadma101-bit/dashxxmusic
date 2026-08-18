@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Город звучит — А101 × DASHXX</title>
+<meta name="description" content="Аудиобренд А101: волна из трёх джинглов, записанных с музыкантом DASHXX. Включите волну — город зазвучит.">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Город звучит — А101 × DASHXX">
+<meta property="og:description" content="Три ритма в одном городе. Аудиобренд А101 × DASHXX.">
+<meta property="og:locale" content="ru_RU">
+<link rel="preload" as="font" type="font/woff2" href="font/onest-cyr.woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27><circle cx=%2716%27 cy=%2716%27 r=%2716%27 fill=%27%23E2232E%27/><path d=%27M13 10l9 6-9 6z%27 fill=%27white%27/></svg>">
+<style>
+@font-face{font-family:'Onest';src:url('font/onest-cyr.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';src:url('font/onest-lat.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* дизайн-токены сайта А101 */
+:root{
+  --red:#E2232E;
+  --red-hover:#C81824;
+  --red-soft:#FDECEC;
+  --ink:#1E1E22;
+  --ink-2:#55555C;
+  --ink-3:#8E8E96;
+  --paper:#FFFFFF;
+  --paper-2:#F5F5F7;
+  --line:rgba(30,30,34,.1);
+  --display:'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --r:20px;
+  --bar-h:88px;
+  --safe:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--display);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:calc(var(--bar-h) + var(--safe))}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:8px}
+[hidden]{display:none!important}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.tnum{font-variant-numeric:tabular-nums}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(18px,3.4vw,44px)}
+
+/* подсказки — по наведению и фокусу (из v4) */
+[data-tip]{position:relative}
+[data-tip]::after{
+  content:attr(data-tip);position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%) translateY(4px);
+  background:var(--ink);color:#fff;font-size:11.5px;line-height:1;white-space:nowrap;
+  padding:7px 10px;border-radius:7px;opacity:0;pointer-events:none;transition:opacity .16s,transform .16s;z-index:80
+}
+[data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(hover:none){[data-tip]::after{display:none}}
+
+/* шапка (из v6) */
+.head{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.head .in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.lockup{display:flex;align-items:center;gap:11px}
+.lockup svg{height:15px;fill:var(--ink)}
+.lockup .x{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.lockup .dash{font-weight:800;font-size:14px}
+.head nav{display:flex;gap:4px}
+.head nav a{padding:9px 15px;border-radius:999px;color:var(--ink-2);font-weight:600;font-size:14px;text-decoration:none;transition:background .2s,color .2s}
+.head nav a:hover{background:var(--paper-2);color:var(--ink)}
+.ghost{
+  display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;
+  border:1px solid var(--line);background:var(--paper);color:var(--ink-2);font-size:12.5px;font-weight:600;
+  transition:background .2s,color .2s
+}
+.ghost svg{width:14px;height:14px;fill:currentColor}
+.ghost:hover{background:var(--paper-2);color:var(--ink)}
+@media(max-width:760px){.head nav{display:none}.ghost span{display:none}.ghost{padding:0 11px}}
+
+/* герой: волна (из v6) + текст рядом на десктопе (принцип v4 — всё видно сразу) */
+.hero{display:grid;grid-template-columns:minmax(0,auto) 1fr;gap:clamp(28px,4.6vw,64px);align-items:center;padding:clamp(32px,5.6vh,64px) 0 clamp(26px,4vh,44px)}
+.orb-w{position:relative;width:clamp(230px,26vw,330px);aspect-ratio:1;flex:none}
+.orb{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:0 30px 70px rgba(226,35,46,.3)}
+.orb canvas{width:100%;height:100%;display:block}
+.orb-play{position:absolute;inset:0;display:grid;place-items:center;border-radius:50%;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.orb-play:hover{transform:scale(1.04)}
+.orb-play:active{transform:scale(.98)}
+.orb-play .disc{position:relative;width:78px;height:78px;border-radius:50%;background:rgba(255,255,255,.95);color:var(--red);display:grid;place-items:center;box-shadow:0 8px 30px rgba(0,0,0,.28)}
+.orb-play svg{width:30px;height:30px;fill:currentColor}
+.orb-play .spin{position:absolute;inset:6px;border-radius:50%;border:2.5px solid rgba(226,35,46,.25);border-top-color:var(--red);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-c{display:flex;flex-direction:column;gap:17px;min-width:0}
+.hero-c .kicker{color:var(--red)}
+.hero-c h1{margin:0;font-size:clamp(34px,4.8vw,62px);font-weight:800;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
+.hero-c .lede{margin:0;max-width:48ch;color:var(--ink-2);font-size:clamp(15px,1.2vw,17px);line-height:1.55}
+.hero-c .lede b{color:var(--ink);font-weight:700}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;
+  background:var(--paper-2);color:var(--ink-2);font-weight:600;font-size:14px;
+  border:1.5px solid transparent;transition:background .2s,color .2s,border-color .2s
+}
+.chip:hover{background:#EDEDF0}
+.chip[aria-pressed="true"]{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55}
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr;justify-items:center;text-align:center;gap:16px;padding:18px 0 22px}
+  .orb-w{width:clamp(170px,48vw,240px)}
+  .orb-play .disc{width:64px;height:64px}
+  .orb-play svg{width:25px;height:25px}
+  .hero-c{align-items:center;gap:12px}
+  .hero-c h1{font-size:clamp(27px,7.6vw,36px)}
+  .hero-c .lede{font-size:14px;line-height:1.5;max-width:42ch}
+  .hero-c .kicker{font-size:10px}
+  .chips{justify-content:center;gap:7px}
+  .chip{height:42px;padding:0 14px;font-size:13px}
+  .keysBtn-hide{display:none}
+  .duo{padding-top:0}
+}
+@media(hover:none) and (max-width:820px){#keysBtn{display:none}}
+
+/* треки + текст: на десктопе рядом (из v4), строки — как в v5/v6 */
+.duo{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:clamp(20px,3vw,40px);align-items:start;padding:6px 0 46px}
+.list h2,.lyr h2{margin:0 0 14px;font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.025em}
+.row{
+  width:100%;display:grid;grid-template-columns:48px 1fr auto auto;gap:15px;align-items:center;text-align:left;
+  padding:10px 12px;border-radius:14px;transition:background .18s
+}
+.row:hover{background:var(--paper-2)}
+.row[aria-current="true"]{background:var(--red-soft)}
+.row .th{width:48px;height:48px;border-radius:10px;overflow:hidden;position:relative;flex:none}
+.row .th canvas{width:100%;height:100%;display:block}
+.row .th .ov{position:absolute;inset:0;background:rgba(30,30,34,.45);display:grid;place-items:center;opacity:0;transition:opacity .2s}
+.row .th .ov svg{width:16px;height:16px;fill:#fff}
+.row:hover .th .ov{opacity:1}
+.row .tt{min-width:0}
+.row .tt b{display:block;font-size:15.5px;font-weight:700;letter-spacing:-.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row[aria-current="true"] .tt b{color:var(--red)}
+.row .tt span{display:block;color:var(--ink-3);font-size:13px;margin-top:2px}
+.row .dur{color:var(--ink-3);font-size:13px}
+.eqbars{display:none;gap:2px;align-items:flex-end;height:13px;width:15px}
+.row[aria-current="true"] .eqbars{display:flex}
+.row[aria-current="true"] .dur{display:none}
+.eqbars i{width:3px;background:var(--red);border-radius:1px;animation:eqb .9s ease-in-out infinite}
+.eqbars i:nth-child(2){animation-delay:.15s}.eqbars i:nth-child(3){animation-delay:.35s}
+.row.paused .eqbars{display:none!important}
+.row.paused[aria-current="true"] .dur{display:block}
+@keyframes eqb{0%,100%{height:25%}50%{height:100%}}
+.list .note{margin:12px 12px 0;color:var(--ink-3);font-size:13px}
+
+.lyr .card{background:var(--paper-2);border-radius:var(--r);padding:clamp(22px,2.4vw,32px);position:sticky;top:84px}
+.lyr .card .mono{color:var(--ink-3)}
+.lyr .body{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.lyr .body p{margin:0;font-size:clamp(18px,1.65vw,24px);font-weight:800;letter-spacing:-.025em;line-height:1.24;color:var(--ink);transition:color .4s}
+.lyr .body p.dim{color:var(--ink-3)}
+@media(max-width:900px){.duo{grid-template-columns:1fr}.lyr .card{position:static}}
+
+/* манифест + финал */
+.manifest{border-top:1px solid var(--line);padding:clamp(40px,7vh,80px) 0}
+.manifest h2{margin:0 0 26px;font-size:clamp(23px,3vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.06;max-width:18ch;text-wrap:balance}
+.sounds{list-style:none;margin:0;padding:0;max-width:920px}
+.sounds li{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:baseline;padding:13px 0;border-top:1px solid var(--line);font-size:clamp(15.5px,1.8vw,23px);font-weight:500}
+.sounds li:last-child{border-bottom:1px solid var(--line)}
+.sounds li .mono{color:var(--ink-3)}
+.credit{margin-top:24px;color:var(--ink-2);font-size:15px;line-height:1.6;max-width:52ch}
+.credit b{color:var(--ink)}
+.fin{background:var(--red);color:#fff;padding:clamp(44px,8vh,90px) 0}
+.fin blockquote{margin:0;font-weight:800;letter-spacing:-.035em;text-transform:uppercase;line-height:.96;font-size:clamp(24px,4vw,56px);max-width:20ch;text-wrap:balance}
+.fin .sig{margin-top:34px;padding-top:18px;border-top:1px solid rgba(255,255,255,.35);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;color:rgba(255,255,255,.88);font-size:12.5px}
+.fin .sig svg{height:14px;fill:#fff}
+
+/* ── постоянный нижний плеер (структура v5, эргономика v4, светлый как v6) ── */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;height:var(--bar-h);
+  background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:minmax(170px,1fr) minmax(0,2.2fr) minmax(170px,1fr);
+  align-items:center;gap:18px;padding:0 clamp(14px,2.4vw,32px)
+}
+.bar .edge{position:absolute;left:0;top:-2px;height:3px;background:var(--red);width:0%;display:none}
+.bar .edge-hit{position:absolute;left:0;right:0;top:-14px;height:26px;cursor:pointer;touch-action:none;display:none}
+.bar-l .btime{display:none;color:var(--ink-3);font-size:11.5px;margin-top:1px}
+.bar-l{display:flex;align-items:center;gap:12px;min-width:0}
+.bar-l .th{width:50px;height:50px;border-radius:9px;overflow:hidden;flex:none}
+.bar-l .th canvas{width:100%;height:100%;display:block}
+.bar-l b{display:block;font-size:13.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-l span{display:block;color:var(--ink-3);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-c{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+.bar-c .btns{display:flex;align-items:center;gap:14px}
+.cbtn{position:relative;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;color:var(--ink-2);transition:color .2s,background .2s,transform .15s}
+.cbtn svg{width:17px;height:17px;fill:currentColor}
+.cbtn:hover{color:var(--ink);background:var(--paper-2)}
+.cbtn:active{transform:scale(.9)}
+.cbtn.on{color:var(--red)}
+.cbtn.on::after{content:'';position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%;background:currentColor}
+.pbtn{position:relative;width:46px;height:46px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;flex:none;transition:transform .18s,background .2s}
+.pbtn:hover{transform:scale(1.06);background:var(--red-hover)}
+.pbtn svg{width:18px;height:18px;fill:currentColor}
+.pbtn .spin{position:absolute;inset:4px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:spin .8s linear infinite}
+.bar-c .line{display:flex;align-items:center;gap:10px;width:100%;max-width:620px;color:var(--ink-3);font-size:11.5px}
+.strip{position:relative;flex:1;height:18px;display:flex;align-items:center;cursor:pointer;touch-action:none}
+.strip .r{position:absolute;left:0;right:0;height:5px;border-radius:3px;background:rgba(30,30,34,.14);transition:height .16s}
+.strip .f{position:absolute;left:0;height:5px;border-radius:3px;background:var(--red);width:0%;transition:height .16s}
+.strip:hover .r,.strip:hover .f,.strip.drag .r,.strip.drag .f{height:7px}
+.strip .k{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--red);margin-left:-6.5px;left:0;opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s;box-shadow:0 1px 5px rgba(0,0,0,.3)}
+.strip:hover .k,.strip:focus-visible .k,.strip.drag .k{opacity:1;transform:scale(1)}
+.strip .peek{
+  position:absolute;bottom:calc(100% + 7px);transform:translateX(-50%);
+  background:var(--ink);color:#fff;border-radius:6px;padding:4px 8px;font-size:11.5px;font-family:var(--mono);
+  opacity:0;transition:opacity .14s;pointer-events:none;white-space:nowrap
+}
+.strip:hover .peek{opacity:1}
+.bar-r{display:flex;align-items:center;justify-content:flex-end;gap:8px;color:var(--ink-2)}
+.bar-r .mbtn{width:36px;height:36px;display:grid;place-items:center;border-radius:8px;color:inherit;transition:background .2s,color .2s}
+.bar-r .mbtn:hover{background:var(--paper-2);color:var(--ink)}
+.bar-r svg{width:17px;height:17px;fill:currentColor}
+.bar-r input{-webkit-appearance:none;appearance:none;width:96px;height:5px;border-radius:3px;background:rgba(30,30,34,.14);outline:none;cursor:pointer}
+.bar-r input::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--red)}
+.bar-r input::-moz-range-thumb{width:13px;height:13px;border:0;border-radius:50%;background:var(--red)}
+.bar-r .lvl{width:34px;text-align:right;font-size:11.5px;color:var(--ink-3)}
+@media(max-width:900px){
+  .bar{height:auto;min-height:72px;grid-template-columns:minmax(0,1fr) auto;gap:10px;
+       padding:8px clamp(12px,3vw,20px) calc(8px + var(--safe))}
+  .bar .edge,.bar .edge-hit{display:block}
+  .bar-c{align-items:center}
+  .bar-c .line{display:none}
+  .bar-c .btns{gap:2px}
+  .bar-c .btns .cbtn{width:44px;height:44px}
+  #shuffle,#repeat{display:none}
+  .pbtn{width:50px;height:50px}
+  .bar-r{display:none}
+  .bar-l .th{width:46px;height:46px}
+  .bar-l .bsub{display:none}
+  .bar-l .btime{display:block}
+}
+
+/* диалог «Клавиши» (из v4) */
+.keys{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:20px;background:rgba(30,30,34,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.keys .box{width:min(460px,100%);background:#fff;border-radius:18px;padding:26px;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.keys h3{margin:0 0 18px;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.keys dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:11px 18px;align-items:center}
+.keys dt{display:flex;gap:6px}
+.keys kbd{font-family:var(--mono);font-size:11px;background:var(--paper-2);border:1px solid var(--line);border-radius:6px;padding:5px 9px;min-width:30px;text-align:center}
+.keys dd{margin:0;color:var(--ink-2);font-size:14px}
+.keys .close{margin-top:22px;width:100%;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:700;transition:background .2s}
+.keys .close:hover{background:var(--red-hover)}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="head">
+  <div class="wrap in">
+    <div class="lockup"><svg viewBox="0 0 39 15" aria-label="А101" role="img"><path d="M17.004.153a1.1 1.1 0 0 0-.558.114l-.755.414-3.406 1.928 1.1 2.143 2.312-1.216v10.595h2.624V1.652c0-.83-.584-1.498-1.316-1.498"/><path d="M37.545.147a1.2 1.2 0 0 0-.565.12l-.75.414-3.404 1.928 1.096 2.136 2.31-1.215v10.599h2.62V1.641c0-.82-.584-1.494-1.313-1.494"/><path d="M26.237 0c-2.284 0-4.066 1.483-4.933 3.586a8.5 8.5 0 0 0-.62 3.429c0 2.49.844 4.692 2.555 6.02.864.672 1.859 1.001 2.998 1.001 1.696 0 3.074-.7 4.065-2.065 1.015-1.372 1.475-3.024 1.475-4.956s-.496-3.585-1.509-4.955C29.3.698 27.96.001 26.264.001m2.17 10.076c-.523.863-1.227 1.294-2.129 1.294s-1.602-.431-2.144-1.294c-.54-.873-.805-1.931-.805-3.19s.266-2.31.805-3.17c.542-.878 1.25-1.308 2.144-1.308s1.605.43 2.129 1.308c.546.862.802 1.923.802 3.171s-.257 2.315-.802 3.19"/><path d="M6.822.138c-.457 0-.858.27-1.058.667L0 14.121h2.87l1.19-2.86h5.6l1.184 2.86h2.87L7.877.803A1.17 1.17 0 0 0 6.822.138m-1.79 8.71 1.79-4.42 1.786 4.42z"/></svg><span class="x">✕</span><span class="dash">DASHXX</span></div>
+    <nav aria-label="Разделы">
+      <a href="#wave">Волна</a><a href="#tracks">Треки</a><a href="#about">О проекте</a>
+    </nav>
+    <button class="ghost" id="keysBtn" data-tip="Горячие клавиши · ?">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2m2 3v2h2V9zm4 0v2h2V9zm4 0v2h2V9zm4 0v2h2V9zM6 13v2h12v-2z"/></svg>
+      <span>Клавиши</span>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="wave">
+    <div class="orb-w">
+      <div class="orb"><canvas id="orb"></canvas></div>
+      <button class="orb-play" id="play" aria-label="Включить волну">
+        <span class="disc">
+          <svg id="icPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="icPause" viewBox="0 0 24 24" hidden><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+          <i class="spin" id="spin" hidden></i>
+        </span>
+      </button>
+    </div>
+    <div class="hero-c">
+      <span class="kicker mono">Совместный проект А101 и XXSOUND</span>
+      <h1>Послушай, как звучит твой город</h1>
+      <p class="lede">Шаги по бульвару, мяч о спортплощадку, смех во дворе. Вместе с музыкантом <b>DASHXX</b> мы собрали звуки города в три настроения. Включите волну — треки играют подряд, или выберите своё.</p>
+      <div class="chips" role="group" aria-label="Настроение волны">
+        <button class="chip" data-g="pop" aria-pressed="true"><span class="dot"></span>Город мечты · Pop</button>
+        <button class="chip" data-g="jazz" aria-pressed="false"><span class="dot"></span>С характером · Jazz</button>
+        <button class="chip" data-g="hip" aria-pressed="false"><span class="dot"></span>В движении · Hip-hop</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="duo">
+    <section class="list" id="tracks">
+      <h2>Три ритма в одном городе</h2>
+      <div id="rows" role="list" aria-label="Треки"></div>
+      <p class="note">Клик по треку — играет; клик по играющему — пауза. После трека волна включает следующий.</p>
+    </section>
+
+    <section class="lyr" aria-label="Текст джингла">
+      <h2>Текст джингла</h2>
+      <div class="card">
+        <span class="mono" id="lyrSrc">Pop · «Город мечты»</span>
+        <div class="body" id="lyrBody"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<section class="manifest" id="about"><div class="wrap">
+  <h2>Город звучит. Просто обычно мы этого не замечаем.</h2>
+  <ul class="sounds">
+    <li><span class="mono">01</span><span>Он звучит шагами по бульвару</span></li>
+    <li><span class="mono">02</span><span>Мячом о покрытие спортплощадки</span></li>
+    <li><span class="mono">03</span><span>Смехом во дворе</span></li>
+    <li><span class="mono">04</span><span>Разговорами за столиком на вечерней террасе</span></li>
+    <li><span class="mono">05</span><span>Музыкой из открытого окна</span></li>
+  </ul>
+  <p class="credit">Композитор и продюсер — <b>DASHXX</b>, студия XXSOUND. Три джингла записаны специально для А101: одна тема, три темперамента города.</p>
+</div></section>
+
+<section class="fin"><div class="wrap">
+  <blockquote>Мы не просто строим города, в которых хочется жить — мы задаём им звучание</blockquote>
+  <div class="sig"><svg viewBox="0 0 39 15" aria-label="А101" role="img"><path d="M17.004.153a1.1 1.1 0 0 0-.558.114l-.755.414-3.406 1.928 1.1 2.143 2.312-1.216v10.595h2.624V1.652c0-.83-.584-1.498-1.316-1.498"/><path d="M37.545.147a1.2 1.2 0 0 0-.565.12l-.75.414-3.404 1.928 1.096 2.136 2.31-1.215v10.599h2.62V1.641c0-.82-.584-1.494-1.313-1.494"/><path d="M26.237 0c-2.284 0-4.066 1.483-4.933 3.586a8.5 8.5 0 0 0-.62 3.429c0 2.49.844 4.692 2.555 6.02.864.672 1.859 1.001 2.998 1.001 1.696 0 3.074-.7 4.065-2.065 1.015-1.372 1.475-3.024 1.475-4.956s-.496-3.585-1.509-4.955C29.3.698 27.96.001 26.264.001m2.17 10.076c-.523.863-1.227 1.294-2.129 1.294s-1.602-.431-2.144-1.294c-.54-.873-.805-1.931-.805-3.19s.266-2.31.805-3.17c.542-.878 1.25-1.308 2.144-1.308s1.605.43 2.129 1.308c.546.862.802 1.923.802 3.171s-.257 2.315-.802 3.19"/><path d="M6.822.138c-.457 0-.858.27-1.058.667L0 14.121h2.87l1.19-2.86h5.6l1.184 2.86h2.87L7.877.803A1.17 1.17 0 0 0 6.822.138m-1.79 8.71 1.79-4.42 1.786 4.42z"/></svg><span>a101.ru · Музыка — DASHXX / XXSOUND</span></div>
+</div></section>
+
+<div class="bar" role="region" aria-label="Плеер">
+  <span class="edge" id="edge" aria-hidden="true"></span>
+  <span class="edge-hit" id="edgeHit" role="slider" tabindex="0" aria-label="Перемотка"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00"></span>
+  <div class="bar-l">
+    <span class="th"><canvas id="barThumb"></canvas></span>
+    <span style="min-width:0"><b id="barTitle">Pop — «Город мечты»</b><span class="bsub">DASHXX · аудиобренд А101</span><span class="btime tnum" id="barTime">0:00 / 0:45</span></span>
+  </div>
+  <div class="bar-c">
+    <div class="btns">
+      <button class="cbtn" id="shuffle" aria-pressed="false" aria-label="Перемешать" data-tip="Перемешать">
+        <svg viewBox="0 0 24 24"><path d="M17 3v3h-2.2l-2.3 3.1 1.3 1.7L16 8h1v3l4-4zM3 6h3.6l2 2.7 1.3-1.7L7.4 4H3zm14 9v-3l-2.2 2.9L12 11.2l-1.3 1.7 2.2 2.9H17v3l4-4zM3 18h4.4l6-8H17V7l-1.7 2.3L11 15H3z"/></svg>
+      </button>
+      <button class="cbtn" id="prev" aria-label="Предыдущий трек" data-tip="Предыдущий · P">
+        <svg viewBox="0 0 24 24"><path d="M7 6h2v12H7zm3 6 9 6V6z"/></svg>
+      </button>
+      <button class="pbtn" id="bPlay" aria-label="Слушать" data-tip="Пробел">
+        <svg id="bIcPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="bIcPause" viewBox="0 0 24 24" hidden><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+        <i class="spin" id="bSpin" hidden></i>
+      </button>
+      <button class="cbtn" id="next" aria-label="Следующий трек" data-tip="Следующий · N">
+        <svg viewBox="0 0 24 24"><path d="M15 6h2v12h-2zM5 18l9-6-9-6z"/></svg>
+      </button>
+      <button class="cbtn" id="repeat" aria-pressed="false" aria-label="Повторять трек" data-tip="Повтор">
+        <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2z"/></svg>
+      </button>
+    </div>
+    <div class="line tnum">
+      <span id="cur">0:00</span>
+      <span class="strip" id="strip" role="slider" tabindex="0" aria-label="Перемотка" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00">
+        <span class="r"></span><span class="f" id="fill"></span><span class="k" id="knob"></span><span class="peek" id="peek">0:00</span>
+      </span>
+      <span id="dur">0:45</span>
+    </div>
+  </div>
+  <div class="bar-r">
+    <button class="mbtn" id="mute" aria-label="Выключить звук" data-tip="Без звука · M">
+      <svg id="icVol" viewBox="0 0 24 24"><path d="M5 9v6h4l5 4V5L9 9zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4"/></svg>
+      <svg id="icMute" viewBox="0 0 24 24" hidden><path d="M5 9v6h4l5 4V5L9 9zm14.6 3 2.2-2.2-1.4-1.4L18.2 10 16 7.8l-1.4 1.4 2.2 2.2-2.2 2.2 1.4 1.4 2.2-2.2 2.2 2.2 1.4-1.4z"/></svg>
+    </button>
+    <input type="range" id="vol" min="0" max="100" value="85" aria-label="Громкость">
+    <span class="lvl tnum" id="volLvl">85%</span>
+  </div>
+</div>
+
+<div class="keys" id="keys" hidden role="dialog" aria-modal="true" aria-labelledby="keysTitle">
+  <div class="box">
+    <h3 id="keysTitle">Горячие клавиши</h3>
+    <dl>
+      <dt><kbd>Пробел</kbd></dt><dd>Играть или пауза</dd>
+      <dt><kbd>←</kbd><kbd>→</kbd></dt><dd>Перемотка на 5 секунд</dd>
+      <dt><kbd>↑</kbd><kbd>↓</kbd></dt><dd>Громкость</dd>
+      <dt><kbd>N</kbd><kbd>P</kbd></dt><dd>Следующий и предыдущий трек</dd>
+      <dt><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd></dt><dd>Pop, Jazz, Hip-hop</dd>
+      <dt><kbd>M</kbd></dt><dd>Выключить звук</dd>
+      <dt><kbd>?</kbd></dt><dd>Эта подсказка</dd>
+    </dl>
+    <button class="close" id="keysClose">Понятно</button>
+  </div>
+</div>
+
+<audio id="au" preload="metadata"></audio>
+<script>
+(function(){
+  "use strict";
+  var TR = {
+    pop: {name:'Pop — «Город мечты»', short:'Pop', mood:'Город мечты', src:'audio/pop.m4a', dur:'0:45',
+      lines:['Обрети дом','где тебя ждут','огни за окном','тебя зовут','А101 — ты не один!'],
+      cues:null, ink:'#1A0507', c1:'#E2232E', c2:'#FF7A4D', c3:'#FFD9C2'},
+    jazz:{name:'Jazz — «Город с характером»', short:'Jazz', mood:'Город с характером', src:'audio/jazz.m4a', dur:'0:53',
+      lines:['Разные районы, но всё в шаге от дома','бизнес, спорт, искусство, что тебе угодно','резиденция в лесу, новые знакомства','образование, культура и энергия космоса'],
+      cues:null, ink:'#04091C', c1:'#0A3C9E', c2:'#2E6BE0', c3:'#9FE2EA'},
+    hip: {name:'Hip-hop — «Город в движении»', short:'Hip-hop', mood:'Город в движении', src:'audio/hip.m4a', dur:'0:36',
+      lines:['Строим города','каждый хочет в них жить','жилые районы, новые грани, новая жизнь','здоровье и спорт — условия жир','А101 — это новый мир'],
+      cues:null, ink:'#0A0A0C', c1:'#E2232E', c2:'#F2F2F3', c3:'#7C1116'}
+  };
+  var ORDER=['pop','jazz','hip'], cur='pop', playing=false, shuffle=false, repeat=false;
+  var $=function(i){return document.getElementById(i)};
+  var au=$('au'), reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var ac=null, an=null, bins=null, band={bass:0,mid:0,high:0};
+  function graph(){
+    if(an) return;
+    var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    try{
+      ac=new AC(); var s=ac.createMediaElementSource(au);
+      an=ac.createAnalyser(); an.fftSize=512; an.smoothingTimeConstant=.8;
+      s.connect(an); an.connect(ac.destination);
+      bins=new Uint8Array(an.frequencyBinCount);
+    }catch(e){ an=null }
+  }
+  function levels(t){
+    if(an&&playing){
+      an.getByteFrequencyData(bins);
+      var avg=function(a,b){var m=0,c=0;for(var i=a;i<b&&i<bins.length;i++){m+=bins[i];c++}return c?m/c/255:0};
+      band.bass+=(avg(1,10)-band.bass)*.3; band.mid+=(avg(10,50)-band.mid)*.3; band.high+=(avg(50,120)-band.high)*.3;
+    } else {
+      var b=.15+.06*Math.sin(t*.0008), m=.11+.05*Math.sin(t*.0006+1.3), h=.08+.04*Math.sin(t*.0011+2.1);
+      band.bass+=(b-band.bass)*.05; band.mid+=(m-band.mid)*.05; band.high+=(h-band.high)*.05;
+    }
+  }
+  function fit(cv){
+    var r=cv.getBoundingClientRect(), d=Math.min(devicePixelRatio||1,2);
+    var w=Math.max(1,Math.round(r.width*d)), h=Math.max(1,Math.round(r.height*d));
+    if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
+  }
+  var grain=(function(){
+    var g=document.createElement('canvas'); g.width=g.height=140;
+    var x=g.getContext('2d'), im=x.createImageData(140,140), d=im.data;
+    for(var i=0;i<d.length;i+=4){
+      var v=200+Math.random()*55;
+      d[i]=d[i+1]=d[i+2]=v; d[i+3]=Math.random()*46;
+    }
+    x.putImageData(im,0,0); return g;
+  })();
+  function paint(cv, key, t){
+    if(!cv) return;
+    var c=cv.getContext('2d'), W=cv.width, H=cv.height, T=TR[key];
+    if(!W||!H) return;
+    var S=Math.min(W,H);
+    c.fillStyle=T.ink; c.fillRect(0,0,W,H);
+
+    if(key==='pop'){
+      // солнце над двором: плотная форма, а не размытое пятно
+      var bg=c.createLinearGradient(0,0,0,H);
+      bg.addColorStop(0,'#F0454B'); bg.addColorStop(.52,'#E2232E'); bg.addColorStop(1,'#6E1014');
+      c.fillStyle=bg; c.fillRect(0,0,W,H);
+
+      var sx=W*0.5, sy=H*0.60, sr=S*(0.235+band.bass*0.055);
+
+      // кольца звука вокруг солнца
+      for(var r=0;r<6;r++){
+        var ph=((t*0.00010 + r*0.166) % 1);
+        var rad=sr*(1.08+ph*2.4);
+        c.strokeStyle='rgba(255,228,214,'+((1-ph)*0.34*(0.45+band.mid)).toFixed(3)+')';
+        c.lineWidth=Math.max(1.2, S*0.0045);
+        c.beginPath(); c.arc(sx,sy,rad,0,6.2832); c.stroke();
+      }
+      // ореол
+      var hg=c.createRadialGradient(sx,sy,sr*0.6,sx,sy,sr*2.5);
+      hg.addColorStop(0,'rgba(255,214,190,.55)'); hg.addColorStop(1,'rgba(255,214,190,0)');
+      c.fillStyle=hg; c.beginPath(); c.arc(sx,sy,sr*2.5,0,6.2832); c.fill();
+      // диск
+      var dg=c.createRadialGradient(sx,sy-sr*0.25,0,sx,sy,sr);
+      dg.addColorStop(0,'#FFFFFF'); dg.addColorStop(.62,'#FFE3D2'); dg.addColorStop(1,'#FFC39F');
+      c.fillStyle=dg; c.beginPath(); c.arc(sx,sy,sr,0,6.2832); c.fill();
+      // горизонт
+      c.fillStyle='rgba(110,16,20,.55)'; c.fillRect(0,H*0.76,W,H*0.24);
+      c.fillStyle='rgba(255,227,210,.16)'; c.fillRect(0,H*0.76-Math.max(1,S*0.002),W,Math.max(1,S*0.002));
+    }
+
+    if(key==='jazz'){
+      // вертикальная «штора» света — визуальный код XXSOUND
+      var n=26;
+      for(var j=0;j<n;j++){
+        var u=j/n;
+        var w=S*(0.014+0.03*Math.abs(Math.sin(u*7.1+t*0.00015)));
+        var x=u*W + Math.sin(t*0.00021+u*5.3)*S*0.03;
+        var a=0.10+0.42*Math.pow(Math.abs(Math.sin(u*3.7+t*0.00026)),2)*(0.55+band.mid);
+        var g2=c.createLinearGradient(x,0,x,H);
+        g2.addColorStop(0,'rgba(255,255,255,'+(a*0.9)+')');
+        g2.addColorStop(.42,'rgba(46,107,224,'+(a*0.85)+')');
+        g2.addColorStop(1,'rgba(10,60,158,'+(a*0.25)+')');
+        c.fillStyle=g2; c.fillRect(x,0,w,H);
+      }
+      var vg=c.createRadialGradient(W*.5,H*.42,0,W*.5,H*.5,S*.78);
+      vg.addColorStop(0,'rgba(159,226,234,'+(0.10+band.high*0.20)+')'); vg.addColorStop(1,'rgba(4,9,28,.65)');
+      c.fillStyle=vg; c.fillRect(0,0,W,H);
+    }
+
+    if(key==='hip'){
+      // жёсткая вертикальная сетка — «город в движении»
+      var m=13, cw=W/m;
+      for(var k2=0;k2<m;k2++){
+        var lvl=(an&&playing&&bins)? bins[4+k2*3]/255 : (0.32+0.3*Math.sin(t*0.0011+k2*0.9));
+        lvl=Math.pow(Math.max(0,lvl),.9);
+        var bh=H*(0.42+lvl*0.56);
+        c.fillStyle = (k2%4===1)? T.c2 : T.c1;
+        c.globalAlpha = (k2%4===1)? 0.9 : 0.86;
+        c.fillRect(k2*cw+cw*0.14, H-bh, cw*0.72, bh);
+      }
+      c.globalAlpha=1;
+      // диагональный росчерк — движение
+      c.save();
+      c.translate(W*0.5,H*0.5); c.rotate(-0.42);
+      c.fillStyle='rgba(242,242,243,.92)';
+      c.fillRect(-W*0.9, -S*0.018 + Math.sin(t*0.0006)*S*0.02, W*1.8, S*0.036);
+      c.restore();
+      var sg=c.createLinearGradient(0,0,0,H);
+      sg.addColorStop(0,'rgba(10,10,12,.72)'); sg.addColorStop(.42,'rgba(10,10,12,.06)'); sg.addColorStop(1,'rgba(124,17,22,.42)');
+      c.fillStyle=sg; c.fillRect(0,0,W,H);
+    }
+
+    // зерно
+    var pat=c.createPattern(grain,'repeat');
+    if(pat){ c.globalAlpha=.5; c.fillStyle=pat; c.fillRect(0,0,W,H); c.globalAlpha=1 }
+
+    // общая виньетка, чтобы текст на обложке читался
+    var sh=c.createLinearGradient(0,H*0.42,0,H);
+    sh.addColorStop(0,'rgba(0,0,0,0)'); sh.addColorStop(1,'rgba(0,0,0,.62)');
+    c.fillStyle=sh; c.fillRect(0,H*0.42,W,H*0.58);
+
+    // кромка конверта
+    c.strokeStyle='rgba(255,255,255,.14)'; c.lineWidth=Math.max(1,S*0.003);
+    c.strokeRect(c.lineWidth/2, c.lineWidth/2, W-c.lineWidth, H-c.lineWidth);
+  }
+
+  // тайл зерна: без него градиенты выглядят «мыльными»
+  var grain=(function(){
+    var g=document.createElement('canvas'); g.width=g.height=140;
+    var x=g.getContext('2d'), im=x.createImageData(140,140), d=im.data;
+    for(var i=0;i<d.length;i+=4){
+      var v=200+Math.random()*55;
+      d[i]=d[i+1]=d[i+2]=v; d[i+3]=Math.random()*46;
+    }
+    x.putImageData(im,0,0); return g;
+  })();
+  var cover=$('cover'), amb=$('amb'), mThumb=$('mThumb'), thumbs={};
+
+  /* волна (v6) */
+  var orb=$('orb');
+  function drawOrb(t){
+    var c=orb.getContext('2d'), W=orb.width, H=orb.height, T=TR[cur];
+    if(!W||!H) return;
+    var S=Math.min(W,H);
+    var bg=c.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,T.c1); bg.addColorStop(1,T.ink);
+    c.fillStyle=bg; c.fillRect(0,0,W,H);
+    var blobs=[
+      [.5+.16*Math.sin(t*.00031), .42+.14*Math.cos(t*.00027), .52, T.c2, .9],
+      [.36+.15*Math.cos(t*.00023+2), .62+.13*Math.sin(t*.00033+1), .44, T.c3, .75],
+      [.68+.13*Math.sin(t*.00019+4), .3+.12*Math.cos(t*.00025+3), .38, '#FFFFFF', .5]
+    ];
+    c.globalCompositeOperation='lighter';
+    for(var i=0;i<blobs.length;i++){
+      var b=blobs[i];
+      var rr=b[2]*S*(0.8+band.bass*0.5+(i===2?band.high*0.5:0));
+      var g=c.createRadialGradient(b[0]*W,b[1]*H,0,b[0]*W,b[1]*H,rr);
+      g.addColorStop(0,b[3]); g.addColorStop(.5,b[3]+'44'); g.addColorStop(1,b[3]+'00');
+      c.globalAlpha=b[4];
+      c.beginPath(); c.arc(b[0]*W,b[1]*H,rr,0,6.2832); c.fillStyle=g; c.fill();
+    }
+    c.globalAlpha=1; c.globalCompositeOperation='source-over';
+    for(var r2=0;r2<3;r2++){
+      var ph=((t*.00014)+r2*.333)%1;
+      c.strokeStyle='rgba(255,255,255,'+((1-ph)*.35*(.4+band.mid)).toFixed(3)+')';
+      c.lineWidth=Math.max(1,S*.006);
+      c.beginPath(); c.arc(W/2,H/2,S*(.12+ph*.5),0,6.2832); c.stroke();
+    }
+    var pat=c.createPattern(grain,'repeat');
+    if(pat){ c.globalAlpha=.4; c.fillStyle=pat; c.fillRect(0,0,W,H); c.globalAlpha=1 }
+  }
+
+  var barThumb=$('barThumb'), thumbs=[], fc=0;
+  function frame(t){
+    levels(t); fc++;
+    fit(orb); drawOrb(t);
+    if(fc%2===0&&barThumb.getBoundingClientRect().width){ fit(barThumb); paint(barThumb,cur,t) }
+    if(fc%3===0){
+      for(var i=0;i<thumbs.length;i++){
+        var it=thumbs[i]; if(!it.cv.getBoundingClientRect().width) continue;
+        fit(it.cv); paint(it.cv,it.k,t*(it.k===cur?1:.35));
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var PLAY_SVG='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  function renderRows(){
+    var box=$('rows'); box.innerHTML=''; thumbs=[];
+    ORDER.forEach(function(k){
+      var T=TR[k], b=document.createElement('button');
+      b.className='row'; b.dataset.g=k; b.setAttribute('role','listitem');
+      b.setAttribute('aria-current',String(k===cur));
+      b.setAttribute('aria-label','Слушать: '+T.name);
+      b.innerHTML='<span class="th"><canvas></canvas><span class="ov">'+PLAY_SVG+'</span></span>'+
+        '<span class="tt"><b>'+T.name+'</b><span>DASHXX · аудиобренд А101</span></span>'+
+        '<span class="dur tnum">'+T.dur+'</span>'+
+        '<span class="eqbars" aria-hidden="true"><i></i><i></i><i></i></span>';
+      b.addEventListener('click',function(){ k===cur ? toggle() : load(k,true) });   /* жест из v5 */
+      box.appendChild(b);
+      thumbs.push({k:k,cv:b.querySelector('canvas')});
+    });
+  }
+  function mark(){
+    document.querySelectorAll('.row').forEach(function(b){
+      b.setAttribute('aria-current',String(b.dataset.g===cur));
+      b.classList.toggle('paused',!playing);
+    });
+    document.querySelectorAll('.chip').forEach(function(b){
+      b.setAttribute('aria-pressed',String(b.dataset.g===cur));
+    });
+  }
+  function renderLyr(){
+    var T=TR[cur], b=$('lyrBody'); b.innerHTML='';
+    T.lines.forEach(function(l,i){
+      var p=document.createElement('p'); p.textContent=l; p.dataset.i=i;
+      if(T.cues) p.classList.add('dim');
+      b.appendChild(p);
+    });
+    $('lyrSrc').textContent=T.short+' · «'+T.mood+'»';
+  }
+  function syncLyr(){
+    var T=TR[cur]; if(!T.cues) return;
+    var i=-1, t=au.currentTime, j;
+    for(j=0;j<T.cues.length;j++){ if(t>=T.cues[j]) i=j }
+    document.querySelectorAll('#lyrBody p').forEach(function(p,k){ p.classList.toggle('dim',k!==i) });
+  }
+
+  function fmt(s){ s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2) }
+  function vis(el,on){ if(el){ on?el.removeAttribute('hidden'):el.setAttribute('hidden','') } }
+  function icons(){
+    vis($('icPlay'),!playing); vis($('icPause'),playing);
+    vis($('bIcPlay'),!playing); vis($('bIcPause'),playing);
+    var l=playing?'Пауза':'Слушать';
+    $('play').setAttribute('aria-label',playing?'Пауза':'Включить волну');
+    $('bPlay').setAttribute('aria-label',l);
+    $('bPlay').setAttribute('data-tip',playing?'Пауза · пробел':'Слушать · пробел');
+    mark();
+  }
+  function mediaMeta(){
+    if(!('mediaSession' in navigator)) return;
+    try{
+      var art=[];
+      try{ art=[{src:orb.toDataURL('image/png'),sizes:'512x512',type:'image/png'}] }catch(e){}
+      navigator.mediaSession.metadata=new MediaMetadata({
+        title:TR[cur].name, artist:'DASHXX', album:'Город звучит · А101', artwork:art
+      });
+    }catch(e){}
+  }
+  function load(k,auto){
+    cur=k; au.src=TR[k].src;
+    $('barTitle').textContent=TR[k].name;
+    $('cur').textContent='0:00'; $('dur').textContent=TR[k].dur;
+    $('barTime').textContent='0:00 / '+TR[k].dur;
+    $('fill').style.width='0%'; $('knob').style.left='0%'; $('edge').style.width='0%';
+    renderLyr(); mark();
+    setTimeout(mediaMeta,120);
+    if(auto) play();
+  }
+  function play(){ graph(); if(ac&&ac.state==='suspended') ac.resume(); au.play().catch(function(){}) }
+  function toggle(){ au.paused?play():au.pause() }
+  function step(d){
+    var i=ORDER.indexOf(cur);
+    if(shuffle){ var n=i; while(n===i) n=Math.floor(Math.random()*ORDER.length); i=n }
+    else i=(i+d+ORDER.length)%ORDER.length;
+    load(ORDER[i],true);
+  }
+
+  au.addEventListener('play',function(){playing=true;icons()});
+  au.addEventListener('pause',function(){playing=false;icons()});
+  au.addEventListener('waiting',function(){ vis($('spin'),true); vis($('bSpin'),true) });
+  au.addEventListener('playing',function(){ vis($('spin'),false); vis($('bSpin'),false) });
+  au.addEventListener('canplay',function(){ vis($('spin'),false); vis($('bSpin'),false) });
+  au.addEventListener('ended',function(){ if(repeat){au.currentTime=0;play();return} step(1) });  /* волна не останавливается */
+  au.addEventListener('loadedmetadata',function(){ if(isFinite(au.duration)) $('dur').textContent=fmt(au.duration) });
+  function dur(){ return isFinite(au.duration)&&au.duration?au.duration:45 }
+  function ui(){
+    var p=Math.min(1,au.currentTime/dur());
+    $('fill').style.width=(p*100)+'%'; $('knob').style.left=(p*100)+'%';
+    $('edge').style.width=(p*100)+'%';
+    $('cur').textContent=fmt(au.currentTime);
+    $('barTime').textContent=fmt(au.currentTime)+' / '+fmt(dur());
+    $('strip').setAttribute('aria-valuenow',Math.round(p*100));
+    $('strip').setAttribute('aria-valuetext',fmt(au.currentTime)+' из '+fmt(dur()));
+    $('edgeHit').setAttribute('aria-valuenow',Math.round(p*100));
+    $('edgeHit').setAttribute('aria-valuetext',fmt(au.currentTime)+' из '+fmt(dur()));
+    syncLyr();
+  }
+  au.addEventListener('timeupdate',ui);
+  au.addEventListener('seeked',ui);
+
+  function back(){ if(au.currentTime>3){au.currentTime=0;ui()}else step(-1) }
+  $('play').addEventListener('click',toggle);
+  $('bPlay').addEventListener('click',toggle);
+  $('prev').addEventListener('click',back);
+  $('next').addEventListener('click',function(){step(1)});
+  $('shuffle').addEventListener('click',function(){
+    shuffle=!shuffle; this.classList.toggle('on',shuffle); this.setAttribute('aria-pressed',String(shuffle));
+    this.setAttribute('data-tip',shuffle?'Перемешивание включено':'Перемешать');
+  });
+  $('repeat').addEventListener('click',function(){
+    repeat=!repeat; this.classList.toggle('on',repeat); this.setAttribute('aria-pressed',String(repeat));
+    this.setAttribute('data-tip',repeat?'Повтор включён':'Повтор');
+  });
+  document.querySelectorAll('.chip').forEach(function(b){
+    b.addEventListener('click',function(){ load(b.dataset.g,true) });
+  });
+
+  /* громкость с памятью (v4) */
+  var lastVol=.85;
+  function setVol(v,quiet){
+    v=Math.min(1,Math.max(0,v));
+    au.volume=v; au.muted=(v===0);
+    $('vol').value=Math.round(v*100); $('volLvl').textContent=Math.round(v*100)+'%';
+    vis($('icVol'),v>0); vis($('icMute'),v===0);
+    $('mute').setAttribute('aria-label',v===0?'Включить звук':'Выключить звук');
+    $('mute').setAttribute('data-tip',v===0?'Включить звук · M':'Без звука · M');
+    if(!quiet){ try{ localStorage.setItem('a101vol',String(v)) }catch(e){} }
+    if(v>0) lastVol=v;
+  }
+  $('vol').addEventListener('input',function(){ setVol(this.value/100) });
+  $('mute').addEventListener('click',function(){ setVol(au.volume>0?0:lastVol) });
+  (function(){
+    var v=.85;
+    try{ var st=localStorage.getItem('a101vol'); if(st!==null) v=parseFloat(st) }catch(e){}
+    setVol(isFinite(v)?v:.85,true);
+  })();
+
+  /* скраббер с подсказкой времени (v4) */
+  var st=$('strip'), peek=$('peek');
+  function pos(x){ var r=st.getBoundingClientRect(); return Math.min(1,Math.max(0,(x-r.left)/r.width)) }
+  function seek(x){ au.currentTime=pos(x)*dur(); ui() }
+  st.addEventListener('pointerdown',function(e){ st.setPointerCapture(e.pointerId); st.classList.add('drag'); seek(e.clientX) });
+  st.addEventListener('pointermove',function(e){
+    var p=pos(e.clientX);
+    peek.style.left=(p*100)+'%'; peek.textContent=fmt(p*dur());
+    if(e.buttons) seek(e.clientX);
+  });
+  st.addEventListener('pointerup',function(){ st.classList.remove('drag') });
+  st.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){au.currentTime=Math.min(dur(),au.currentTime+5);ui();e.preventDefault()}
+    if(e.key==='ArrowLeft'){au.currentTime=Math.max(0,au.currentTime-5);ui();e.preventDefault()}
+    if(e.key===' '||e.key==='Enter'){toggle();e.preventDefault()}
+  });
+  /* мобильная перемотка: нить по верхней кромке бара */
+  var eh=$('edgeHit');
+  function eseek(x){ var r=eh.getBoundingClientRect(); au.currentTime=Math.min(1,Math.max(0,(x-r.left)/r.width))*dur(); ui() }
+  eh.addEventListener('pointerdown',function(e){ eh.setPointerCapture(e.pointerId); eseek(e.clientX) });
+  eh.addEventListener('pointermove',function(e){ if(e.buttons) eseek(e.clientX) });
+  eh.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){au.currentTime=Math.min(dur(),au.currentTime+5);ui();e.preventDefault()}
+    if(e.key==='ArrowLeft'){au.currentTime=Math.max(0,au.currentTime-5);ui();e.preventDefault()}
+    if(e.key===' '||e.key==='Enter'){toggle();e.preventDefault()}
+  });
+
+  /* диалог клавиш (v4) */
+  var keys=$('keys'), lastFocus=null;
+  function openKeys(){ lastFocus=document.activeElement; vis(keys,true); $('keysClose').focus() }
+  function closeKeys(){ vis(keys,false); if(lastFocus) lastFocus.focus() }
+  $('keysBtn').addEventListener('click',openKeys);
+  $('keysClose').addEventListener('click',closeKeys);
+  keys.addEventListener('click',function(e){ if(e.target===keys) closeKeys() });
+
+  /* горячие клавиши (v4) */
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var tag=document.activeElement.tagName;
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test(tag)) return;
+    if(!keys.hasAttribute('hidden')){ if(e.key==='Escape'){closeKeys();e.preventDefault()} return }
+    var k=e.key.toLowerCase();
+    if(e.code==='Space'&&!/^(BUTTON|A)$/.test(tag)){ toggle(); e.preventDefault(); return }
+    if(document.activeElement.id==='strip') return;
+    if(e.key==='ArrowRight'){ au.currentTime=Math.min(dur(),au.currentTime+5); ui(); e.preventDefault() }
+    else if(e.key==='ArrowLeft'){ au.currentTime=Math.max(0,au.currentTime-5); ui(); e.preventDefault() }
+    else if(e.key==='ArrowUp'){ setVol(au.volume+.05); e.preventDefault() }
+    else if(e.key==='ArrowDown'){ setVol(au.volume-.05); e.preventDefault() }
+    else if(k==='n'||k==='т'){ step(1) }
+    else if(k==='p'||k==='з'){ back() }
+    else if(k==='m'||k==='ь'){ setVol(au.volume>0?0:lastVol) }
+    else if(e.key==='1'){ load('pop',true) }
+    else if(e.key==='2'){ load('jazz',true) }
+    else if(e.key==='3'){ load('hip',true) }
+    else if(e.key==='?'||e.key==='/'){ openKeys(); e.preventDefault() }
+  });
+
+  /* режим снятия таймкодов для караоке-подсветки */
+  if(/[?&]tune=1/.test(location.search)){
+    var stamps=[];
+    document.addEventListener('keydown',function(e){
+      if(/^[tTеЕ]$/.test(e.key)){ stamps.push(Number(au.currentTime.toFixed(2))); console.log(cur+' cues:',JSON.stringify(stamps)) }
+      if(e.key==='Backspace'){ stamps.pop(); console.log(cur+' cues:',JSON.stringify(stamps)) }
+    });
+    console.log('Режим таймкодов: включите трек и жмите «Т» в начале каждой строки.');
+  }
+
+  /* медиаклавиши ОС (v4) */
+  if('mediaSession' in navigator){
+    try{
+      navigator.mediaSession.setActionHandler('play',play);
+      navigator.mediaSession.setActionHandler('pause',function(){au.pause()});
+      navigator.mediaSession.setActionHandler('previoustrack',back);
+      navigator.mediaSession.setActionHandler('nexttrack',function(){step(1)});
+      navigator.mediaSession.setActionHandler('seekto',function(d){ if(d.seekTime!=null){au.currentTime=d.seekTime;ui()} });
+    }catch(e){}
+  }
+
+  renderRows(); renderLyr(); load('pop',false); icons();
+  if(reduce){ levels(0); fit(orb); drawOrb(0) } else requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
